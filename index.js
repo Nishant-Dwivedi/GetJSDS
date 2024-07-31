@@ -13,7 +13,11 @@ app.get("/ds/:ds_name", (req, res) => {
   data_structure_model
     .findOne({ name: req.params.ds_name })
     .then((ds) => {
-      console.log(ds);
+      console.log(
+        ds != null
+          ? `${ds.name} fetched successfully from the database.`
+          : `database couldn't find the requested resource.`
+      );
       ds !== null ? res.json(ds) : res.status(404).send(`resource not found.`);
     })
     .catch((e) => {
