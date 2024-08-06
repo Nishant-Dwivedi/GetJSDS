@@ -1,6 +1,7 @@
 const getjsdsRouter = require("express").Router();
 const { alertLogger } = require("../utilities/logger");
-const data_structure_model = require("../model/model").data_structure_model;
+const data_structure_model =
+  require("../data-access/model").data_structure_model;
 const errorHandler = require("../utilities/errorHandler").errorHandler;
 
 getjsdsRouter.get("/:ds_name", (req, res, next) => {
@@ -11,7 +12,7 @@ getjsdsRouter.get("/:ds_name", (req, res, next) => {
       ds != null
         ? alertLogger(`${ds.name} fetched successfully from the database.`)
         : alertLogger(`database couldn't find the requested resource.`);
-      ds !== null ? res.json(ds) : res.status(404).send(`resource not found.`);
+      ds !== null ? res.json(ds) : res.status(404).end();
     })
     .catch((e) => {
       next(e);
