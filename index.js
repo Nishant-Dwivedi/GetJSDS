@@ -1,7 +1,7 @@
 const express = require("express");
 const { alertLogger } = require("./utilities/logger");
 const cors = require("cors");
-const getjsdsRouter = require("./controllers/getJSDS").getjsdsRouter;
+const getjsdsRouter = require("./entry-points/controller").getjsdsRouter;
 const app = express();
 
 app.listen(3000, () => {
