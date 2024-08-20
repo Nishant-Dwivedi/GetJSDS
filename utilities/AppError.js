@@ -1,7 +1,8 @@
 class AppError extends Error {
-  constructor(statusCode, errMessage) {
-    super(errMessage);
-    this.statusCode = statusCode;
+  constructor(errDescription, isOperationalError = true, httpStatusCode) {
+    super(errDescription);
+    httpStatusCode ? (this.httpStatusCode = httpStatusCode) : null;
+    this.isOperationalError = isOperationalError;
   }
 }
 

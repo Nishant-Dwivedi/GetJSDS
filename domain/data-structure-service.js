@@ -3,13 +3,14 @@ const dataStructureModel =
 const AppError = require("../utilities/AppError").AppError;
 
 async function getDataStructure(dsName) {
-  return dataStructureModel
+  return await dataStructureModel
     .findOne({ name: dsName }, { _id: 0 }) // modifies the returned document to not have the default object id
     .then((result) => {
       if (result === null) {
         throw new AppError(
-          404,
-          `the requested resource does not exist in the database`
+          `the requested resource does not exist in the database`,
+          true,
+          404
         );
       }
       return Promise.resolve(result);
